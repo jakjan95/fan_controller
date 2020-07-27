@@ -1,17 +1,19 @@
 #include "Fan.hpp"
-#include <stdexcept>
 #include <cmath>
+#include <stdexcept>
 
 Fan::Fan() {
     rpm = 0;
 }
 
-Fan::Fan(Fan&& other) : rpm(std::move(other.rpm)) {}
+Fan::Fan(Fan&& other)
+    : rpm(std::move(other.rpm)) {}
 
-Fan::Fan(const Fan& other) : rpm(other.rpm) {}
+Fan::Fan(const Fan& other)
+    : rpm(other.rpm) {}
 
 void Fan::setSpeed(int newRpm) {
-    if ((newRpm < 1000 and newRpm != 0) or newRpm > 3000) {
+    if ((newRpm < FanSpeeds::minRpm && newRpm != FanSpeeds::disabledRpm) || newRpm > FanSpeeds::maxRpm) {
         throw std::invalid_argument("Invalid speed");
     }
     auto difference = std::abs(newRpm - rpm);
@@ -29,11 +31,11 @@ int Fan::getSpeed() {
 }
 
 bool Fan::disable() {
-    rpm = 0;
+    rpm = FanSpeeds::disabledRpm;
     return true;
 }
 
 bool Fan::enable() {
-    rpm = 1000;
+    rpm = FanSpeeds::minRpm;
     return true;
 }

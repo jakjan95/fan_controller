@@ -73,4 +73,4 @@ add_executable(${PROJECT_NAME}-gtest-ut ${TEST_GTEST})
 target_link_libraries(${PROJECT_NAME}-gtest-ut ${PROJECT_NAME}-lib gtest_main)
 target_compile_options(${PROJECT_NAME}-gtest-ut PRIVATE ${FLAGS})
 
-add_test(NAME ${PROJECT_NAME}-gtest COMMAND ${PROJECT_NAME}-ut)
+add_test(NAME ${PROJECT_NAME}-test COMMAND ${PROJECT_NAME}-gtest-ut)
