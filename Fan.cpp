@@ -2,9 +2,8 @@
 #include <cmath>
 #include <stdexcept>
 
-Fan::Fan() {
-    rpm = 0;
-}
+Fan::Fan()
+    : rpm{0} {}
 
 Fan::Fan(Fan&& other)
     : rpm(std::move(other.rpm)) {}
