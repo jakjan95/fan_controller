@@ -13,22 +13,17 @@ SCENARIO("Controller can control Fan") {
 
         WHEN("Temperature drops below 0") {
             thermometer.temperature = -1;
-            auto temperature = thermometer.getTemperature();
-            REQUIRE(temperature < 0);
             cut.updateRpm();
 
             THEN("Fan should be disabled") {
-                REQUIRE(fan.getSpeed() == 0);
+                REQUIRE(fan.getSpeed() == disabledSpeed);
             }
         }
 
         WHEN("Temperature raise above 100 and updateRpm is called") {
             thermometer.temperature = 101;
-            auto temperature = thermometer.getTemperature();
-            REQUIRE(temperature > 100);
             cut.updateRpm();
             THEN("Fan should work at max speed") {
-                constexpr int maxSpeed = 3000;
                 REQUIRE(fan.getSpeed() == maxSpeed);
             }
         }
