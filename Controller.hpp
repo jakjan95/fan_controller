@@ -1,13 +1,16 @@
 #pragma once
-#include "SlowThermometer/SlowThermometer.hpp"
-#include "Fan.hpp"
 #include <memory>
+#include "Fan.hpp"
+#include "IThermometer.hpp"
 
 class LcdDisplay;
 
 class Controller {
 public:
-    Controller(SlowThermometer, Fan, double, double, std::shared_ptr<LcdDisplay>);
+    Controller(IThermometer& t, Fan, double, double, std::shared_ptr<LcdDisplay>);
     void updateRpm();
     void displayInfo();
+
+private:
+    IThermometer& thermometer_;
 };
