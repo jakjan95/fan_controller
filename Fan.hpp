@@ -1,5 +1,10 @@
 #pragma once
 
+constexpr int maxSpeed = 3000;
+constexpr int disabledSpeed = 0;
+
+
+
 class Fan {
 private:
     int rpm = 0;
